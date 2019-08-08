@@ -1,0 +1,97 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<h1> Frontend Service </h1>
+<hr>
+<button id="log-in">Log In</button>
+<button id="log-in-status">Check LogIn status</button>
+<button id="sign-up">Sign Up</button>
+<button id="log-out">Log Out</button>
+<hr>
+<p id="output"></p>
+<script>
+  var host = "localhost:3000"
+	var settingsLogIn = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://" + host + "/auth/login",
+  "method": "POST",
+  "headers": {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "cache-control": "no-cache",
+  },
+  "data": {
+    "username": "ankit",
+    "password": "password"
+  },
+  xhrFields: {
+      withCredentials: true
+   }
+}
+
+var settingsLogInStatus = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://" + host + "/auth/",
+  "method": "GET",
+  "headers": {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "cache-control": "no-cache",
+  },
+  xhrFields: {
+      withCredentials: true
+   }
+}
+
+var settingsSignUp = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://" + host + "/auth/signup",
+  "method": "POST",
+  "headers": {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "cache-control": "no-cache",
+  },
+  "data": {
+    "username": "ankit",
+    "password": "password",
+    "firstName": "Ankit",
+    "lastName": "Sheth",
+    "email": "ankit.s1213@gmail.com"
+  },
+  xhrFields: {
+      withCredentials: true
+   }
+}
+
+var settingsLogOut = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://" + host +"/auth/logout",
+  "method": "GET",
+  "headers": {
+    "cache-control": "no-cache",
+  },
+  xhrFields: {
+      withCredentials: true
+   }
+}
+
+$('#log-in').on('click', function () {
+  $.ajax(settingsLogIn).done(function (response) {
+    $('#output').text(JSON.stringify(response, null, 2)); });
+})
+
+$('#log-in-status').on('click', function () {
+  $.ajax(settingsLogInStatus).done(function (response) {
+    $('#output').text(JSON.stringify(response, null, 2)); });
+})
+
+$('#sign-up').on('click', function () {
+  $.ajax(settingsSignUp).done(function (response) {
+    $('#output').text(JSON.stringify(response, null, 2)); });
+})
+
+$('#log-out').on('click', function () {
+  $.ajax(settingsLogOut).done(function (response) {
+    $('#output').text(JSON.stringify(response, null, 2)); });
+})
+</script>
