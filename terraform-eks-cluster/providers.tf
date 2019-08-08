@@ -1,5 +1,11 @@
 terraform {
   required_version = ">= 0.12.0"
+
+   backend "s3" {
+    bucket = "devops-test-task-eks-cluster-terraform-state"
+    key    = "terraform_state"
+    region = "eu-central-1"
+  }
 }
 
 provider "aws" {
