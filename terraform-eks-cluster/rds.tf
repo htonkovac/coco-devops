@@ -15,7 +15,7 @@ module "db" {
   password = "YourPwdShouldBeLongAndSecure!"
   port     = "3306"
 
-  vpc_security_group_ids = [ aws_security_group.rds_sec_group.id ]
+  vpc_security_group_ids = [aws_security_group.rds_sec_group.id]
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
@@ -50,9 +50,9 @@ resource "aws_security_group" "rds_sec_group" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    from_port = 3306
-    to_port   = 3306
-    protocol  = "tcp"
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
     security_groups = [module.eks.worker_security_group_id]
   }
 }
