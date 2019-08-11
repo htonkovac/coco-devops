@@ -8,11 +8,11 @@
 <hr>
 <pre id="output"></pre>
 <script>
-  var host = "localhost:3000"
+  var host = "/backend-1-service"
 	var settingsLogIn = {
   "async": true,
   "crossDomain": true,
-  "url": "http://" + host + "/auth/login",
+  "url": host + "/auth/login",
   "method": "POST",
   "headers": {
     "Content-Type": "application/x-www-form-urlencoded",

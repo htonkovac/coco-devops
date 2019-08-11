@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-1-deployment
+  labels:
+    app: backend-1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend-1
+  template:
+    metadata:
+      labels:
+        app: backend-1
+    spec:
+      containers:
+      - name: backend-1
+        image: 068425271656.dkr.ecr.eu-west-1.amazonaws.com/eks_container_repo/backend-1
+        ports:
+        - containerPort: 80
+        env:
+          - name: REDIS_HOST
+            value: "tf-rep-group-1.k9yegx.ng.0001.euw1.cache.amazonaws.com"
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: DB_DATABASE_NAME
+            value: "helloApiDatabase"
+          - name: DB_USERNAME
+            value: "user"
+          - name: DB_PASSWORD
+            value: "YourPwdShouldBeLongAndSecure!"
+          - name: DB_HOST
+            value: "rds-in-eks-cluster.corr736jsrg0.eu-west-1.rds.amazonaws.com"  
+        resources:
+              requests:
+                memory: "64Mi"
+                cpu: "250m"
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+           
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-1-service
+spec:
+  selector:
+    app: backend-1
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP
