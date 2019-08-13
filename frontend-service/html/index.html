@@ -30,7 +30,7 @@
 var settingsLogInStatus = {
   "async": true,
   "crossDomain": true,
-  "url": "http://" + host + "/auth/",
+  "url": host + "/auth/",
   "method": "GET",
   "headers": {
     "Content-Type": "application/x-www-form-urlencoded",
@@ -44,7 +44,7 @@ var settingsLogInStatus = {
 var settingsSignUp = {
   "async": true,
   "crossDomain": true,
-  "url": "http://" + host + "/auth/signup",
+  "url": host + "/auth/signup",
   "method": "POST",
   "headers": {
     "Content-Type": "application/x-www-form-urlencoded",
@@ -65,7 +65,7 @@ var settingsSignUp = {
 var settingsLogOut = {
   "async": true,
   "crossDomain": true,
-  "url": "http://" + host +"/auth/logout",
+  "url": host +"/auth/logout",
   "method": "GET",
   "headers": {
     "cache-control": "no-cache",
