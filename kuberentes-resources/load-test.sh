@@ -1,0 +1,2 @@
+kubectl run load-generato-frontend --image=busybox --replicas=10  -- /bin/sh -c "while true; do wget -q -O - http://frontend-service; done"
+kubectl run load-generato-backend --image=busybox --replicas=10  -- /bin/sh -c "while true; do wget -q -O - http://backend-1-service; done"

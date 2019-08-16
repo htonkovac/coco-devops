@@ -53,12 +53,26 @@ module "eks" {
 
   worker_groups = [
     {
-      name                = "worker-group-1"
-      instance_type       = "t3.medium"
-      additional_userdata = "echo foo bar"
-      asg_min_size        = 1
-      asg_max_size        = 10
-      desired             = 4
+      name                                                    = "${local.cluster_name}-worker-group-1"
+      instance_type                                           = "t3.small"
+      autoscaling_enabled                                     = true
+      protect_from_scale_in                                   = false
+      asg_desired_capacity                                    = 3
+      asg_min_size                                            = 3
+      asg_max_size                                            = 10
     }
   ]
+}
+
+data "template_file" "cluster_autoscaler_values" {
+  template = "${file("${path.module}/cluster_autoscaler_values.tpl")}"
+  vars = {
+    AWS_REGION   = "${var.region}"
+    CLUSTER_NAME = "${local.cluster_name}"
+  }
+}
+
+resource "local_file" "cluster_autoscaler_values" {
+  content  = "${data.template_file.cluster_autoscaler_values.rendered}"
+  filename = "${path.module}/cluster_autoscaler_values_${local.cluster_name}.yaml"
 }
