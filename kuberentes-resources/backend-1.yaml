@@ -32,13 +32,25 @@ spec:
               fieldRef:
                 fieldPath: spec.nodeName
           - name: DB_DATABASE_NAME
-            value: "helloApiDatabase"
+            valueFrom:
+              secretKeyRef:
+                name: rds-conn-details
+                key: rds_dbname
           - name: DB_USERNAME
-            value: "user"
+            valueFrom:
+              secretKeyRef:
+                name: rds-conn-details
+                key: rds_username
           - name: DB_PASSWORD
-            value: "YourPwdShouldBeLongAndSecure!"
+            valueFrom:
+              secretKeyRef:
+                name: rds-conn-details
+                key: rds_password          
           - name: DB_HOST
-            value: "rds-in-eks-cluster.corr736jsrg0.eu-west-1.rds.amazonaws.com"  
+            valueFrom:
+              secretKeyRef:
+                name: rds-conn-details
+                key: rds_address  
         resources:
               requests:
                 memory: "64Mi"
