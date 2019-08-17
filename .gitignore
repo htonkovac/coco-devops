@@ -1,1 +1,5 @@
 **/.terraform
+**/kubeconfig*
+**/config-map-aws-auth*
+cluster_autoscaler_values_*
+environment.env
