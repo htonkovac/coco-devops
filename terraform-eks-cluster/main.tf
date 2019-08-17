@@ -53,13 +53,13 @@ module "eks" {
 
   worker_groups = [
     {
-      name                                                    = "${local.cluster_name}-worker-group-1"
-      instance_type                                           = "t3.small"
-      autoscaling_enabled                                     = true
-      protect_from_scale_in                                   = false
-      asg_desired_capacity                                    = 3
-      asg_min_size                                            = 3
-      asg_max_size                                            = 10
+      name                  = "${local.cluster_name}-worker-group-1"
+      instance_type         = "t3.small"
+      autoscaling_enabled   = true
+      protect_from_scale_in = false
+      asg_desired_capacity  = 3
+      asg_min_size          = 3
+      asg_max_size          = 10
     }
   ]
 }
