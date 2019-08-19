@@ -4,12 +4,17 @@ metadata:
   name: coco-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    ingress.kubernetes.io/use-regex: "true"
+    kubernetes.io/tls-acme: "true"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-
+    hello: world
 spec:
+  tls:
+    - hosts:
+      - hrvojetonkovac.from.hr
+      secretName: tls-certs-hrvojetonkovac.from.hr
   rules:
-  - host: "*.com"
+  - host: hrvojetonkovac.from.hr
     http:
       paths:
       - path: /

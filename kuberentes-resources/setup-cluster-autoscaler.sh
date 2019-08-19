@@ -1,1 +1,0 @@
-helm install stable/cluster-autoscaler --values=cluster_autoscaler_values_`terraform output cluster_name`.yaml

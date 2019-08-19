@@ -12,13 +12,10 @@ echo "Building and pushing docker images"
 ./../backend-service-1/docker-build-and-push.sh
 echo "..."
 
-sleep 10 #Waiting for tiller pods
 echo "Setting up ingres-controller, cluster-autoscaler and metrcis server"
-./../kuberentes-resources/setup-ingress-controller.sh
-./../kuberentes-resources/setup-cluster-autoscaler.sh
-./../kuberentes-resources/setup-metrics-server.sh 
+./../kuberentes-resources/install-cluster-components-with-helm.sh
 echo "..."
 
 kubectl kustomize ./../kuberentes-resources/ | kubectl apply -f -
 kubectl get svc | awk '{if($1=="nginx-ingress-controller-controller")print $4}'
-rm kuberentes-resources/environment.env
+rm ../kuberentes-resources/environment.env

@@ -4,6 +4,10 @@ resources:
   - backend-1.yaml
   - frontend.yaml
   - ingress.yaml
+  - clusterIssuer-staging.yaml
+  - clusterIssuer-prod.yaml
+
+
 secretGenerator:
 - name: rds-conn-details
   env:  environment.env
